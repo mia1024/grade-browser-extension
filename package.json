@@ -1,8 +1,10 @@
 {
   "name": "grade",
+  "author": "Jerie Wang",
   "version": "1.0.0",
   "description": "Gradescope without scope",
   "main": "index.ts",
+  "license": "MIT",
   "scripts": {
     "build": "webpack"
   },
@@ -10,7 +12,6 @@
     "type": "git",
     "url": "git+https://github.com/jeriewang/grade.git"
   },
-  "author": "Jerie Wang",
   "bugs": {
     "url": "https://github.com/jeriewang/grade/issues"
   },
