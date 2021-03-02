@@ -41,7 +41,6 @@ let config = {
         new CopyPlugin({
             patterns:[
                 {from:"src/index.html", to:path.resolve(__dirname,"dist","index.html")},
-                {from:"src/manifest.json", to:path.resolve(__dirname,"dist","manifest.json")},
                 {from:"assets/icon16.png", to:path.resolve(__dirname,"dist","icon16.png")},
                 {from:"assets/icon32.png", to:path.resolve(__dirname,"dist","icon32.png")},
                 {from:"assets/icon48.png", to:path.resolve(__dirname,"dist","icon48.png")},

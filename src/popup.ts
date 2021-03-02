@@ -1,15 +1,24 @@
 import "./popup.scss"
 import $ from "jquery";
 import "foundation-sites";
-import {getCourses} from "./courses"
+import {getCourses, Course} from "./courses"
 import {Assignment, getAssignments} from "./assignments";
 import {strftime} from "./strftime"
+/// <reference types="../node_modules/@types/chrome" />
 
 const root = $("#main");
 const now = new Date();
 
 (async () => {
-    let courses = (await getCourses()).filter(c => c.active);
+    let courses: Course[];
+    try {
+        courses = (await getCourses()).filter(c => c.active);
+    } catch (e) {
+        if (e.message === "Not logged in") {
+            root.empty().html("Cannot fetch data. Please log in to <a href='https://www.gradescope.com/login' target='_blank'>Gradescope</a> and try again");
+            return
+        }
+    }
     let i = 0;
     let assignments: Assignment[] = [];
     let promise = new Promise((resolve) => {
@@ -26,13 +35,14 @@ const now = new Date();
     root.empty();
     let pending_assignments = assignments
         .filter(a => (a.deadline > now || a.lateDeadline > now) && !a.submitted)
-        .sort((a,b)=>a.deadline<b.deadline?-1:a.deadline==b.deadline?0:1);
-    let table = $("<table><tr><td>Name</td><td>Course</td><td>Deadline</td></tr></table>").appendTo(root);
+        .filter(a => (!(a.deadline.getDate() - now.getDate() > 14 || (a.lateDeadline && a.lateDeadline.getDate() - now.getDate() > 14))))
+        .sort((a, b) => a.deadline < b.deadline ? -1 : a.deadline == b.deadline ? 0 : 1);
+    let table = $("<table><tr style='border-bottom: 1.5px solid'><th>Name</th><th>Course</th><th>Deadline</th></tr></table>").appendTo(root);
     console.log(pending_assignments);
-    for (let a of pending_assignments){
-        let link=$(`<td><a href="https://gradescope.com${a.action?a.action:a.course.link+"#grade-click="+a.name}" target="_blank">${a.name}</a></td>`)
-        let course=$(`<td>${a.course.name}</td>`)
-        let deadline=$("<td>"+strftime(a.deadline,"%A, %b %d %I:%M %p")+"</td>");
+    for (let a of pending_assignments) {
+        let link = $(`<th><a href="https://gradescope.com${a.action ? a.action : a.course.link + "#grade-click=" + a.name}" target="_blank">${a.name}</a></th>`)
+        let course = $(`<td>${a.course.name}</td>`)
+        let deadline = $("<td>" + strftime(a.deadline, "%a, %b %d") + "<br>" + strftime(a.deadline, "%I:%M %p") + "</td>");
         $("<tr>").append(link).append(course).append(deadline).appendTo(table);
 
     }
