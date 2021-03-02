@@ -258,4 +258,6 @@ headers.json
 courses.json
 assignments.json
 *.ipynb
+*.crx
+*.pem
 
