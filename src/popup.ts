@@ -35,7 +35,7 @@ const now = new Date();
     root.empty();
     let pending_assignments = assignments
         .filter(a => (a.deadline > now || a.lateDeadline > now) && !a.submitted)
-        .filter(a => (!(a.deadline.getDate() - now.getDate() > 14 || (a.lateDeadline && a.lateDeadline.getDate() - now.getDate() > 14))))
+        .filter(a => (a.deadline.getTime() - now.getTime() < 14*24*60*60*1000))
         .sort((a, b) => a.deadline < b.deadline ? -1 : a.deadline == b.deadline ? 0 : 1);
     let table = $("<table><tr style='border-bottom: 1.5px solid'><th>Name</th><th>Course</th><th>Deadline</th></tr></table>").appendTo(root);
     console.log(pending_assignments);

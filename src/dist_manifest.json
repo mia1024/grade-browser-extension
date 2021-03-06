@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Grade",
   "description": "Organizes your data from Gradescope into one place in a more sensible way",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "permissions": [
     "cookies",
     "https://www.gradescope.com/"
