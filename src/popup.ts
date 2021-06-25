@@ -19,6 +19,7 @@ const now = new Date();
             return
         } else {
             console.error(e)
+            root.empty().html("Unexpected error while fetching courses: "+e)
             return
         }
     }
