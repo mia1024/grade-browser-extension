@@ -17,8 +17,12 @@ const now = new Date();
         if (e.message === "Not logged in") {
             root.empty().html("Cannot fetch data. Please log in to <a href='https://www.gradescope.com/login' target='_blank'>Gradescope</a> and try again");
             return
+        } else {
+            console.error(e)
+            return
         }
     }
+    console.log(courses)
     let i = 0;
     let assignments: Assignment[] = [];
     let promise = new Promise((resolve) => {
