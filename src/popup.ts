@@ -15,11 +15,12 @@ const now = new Date();
         courses = (await getCourses()).filter(c => c.active);
     } catch (e) {
         if (e.message === "Not logged in") {
-            root.empty().html("Cannot fetch data. Please log in to <a href='https://www.gradescope.com/login' target='_blank'>Gradescope</a> and try again");
+            root.empty().html("Cannot fetch data. Please log in to <a href='https://www.gradescope.com/login' target='_blank'>Gradescope</a> first");
+            window.open("https://www.gradescope.com/login","_blank","noopener,noreferrer")
             return
         } else {
             console.error(e)
-            root.empty().html("Unexpected error while fetching courses: "+e)
+            root.empty().html("Unexpected error while fetching courses: "+JSON.stringify(e,null,4))
             return
         }
     }

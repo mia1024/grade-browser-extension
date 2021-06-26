@@ -10,8 +10,10 @@ export type Course = {
 }
 
 function parseCourses(dom: DOM):Course[] {
-    if (!dom.find('title').text().includes(" | "))
+    if (!dom.find('title').text().includes(" | ")) {
+        console.warn(dom[0])
         throw new Error("Not logged in")
+    }
 
     let courseList=dom.find("hr~div.courseList");
     if (courseList.length===0){

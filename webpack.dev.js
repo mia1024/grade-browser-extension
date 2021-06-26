@@ -10,7 +10,7 @@ module.exports = merge(common, {
         compress: false,
         port: 9000,
     },
-    devtool:"source-map",
+    devtool:"inline-source-map",
     plugins: [
         new CopyPlugin({
                 patterns: [
