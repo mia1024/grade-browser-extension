@@ -15,7 +15,7 @@ const MONTHS = {
     'oct': 9,
     'nov': 10,
     'dec': 11
-}
+} as { [k: string]: number }
 
 export type Assignment = {
     course: Course;
@@ -38,8 +38,8 @@ function parseDate(d: string, year: number): Date | undefined {
 }
 
 function parseRow(row: HTMLElement, year: number) {
-    let name=$("th",row).text();
-    let action=$("th>a",row).attr('href');
+    let name = $("th", row).text();
+    let action = $("th>a", row).attr('href');
     let dueDate = $('.submissionTimeChart--dueDate', row)
     let deadline = dueDate.length >= 1 ? parseDate(dueDate.first().text().toLowerCase(), year) : undefined;
     let lateDueDate = dueDate.nextAll('.submissionTimeChart--dueDate');
@@ -68,7 +68,7 @@ export async function getAssignments(course: Course): Promise<Assignment[]> {
     let rows = dom.find("tbody tr[role=row]");
     for (let row of rows) {
         let parsed = parseRow(row, course.year);
-        result.push({...parsed,course})
+        result.push({...parsed, course})
     }
     return result
 }
