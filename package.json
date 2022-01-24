@@ -1,7 +1,7 @@
 {
   "name": "grade",
   "author": "Mia Celeste",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Gradescope without scope",
   "main": "index.ts",
   "license": "MIT",
@@ -12,12 +12,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mia1024/grade.git"
+    "url": "git+https://github.com/mia1024/grade-browser-extension.git"
   },
   "bugs": {
-    "url": "https://github.com/mia1024/grade/issues"
+    "url": "https://github.com/mia1024/grade-browser-extension/issues"
   },
-  "homepage": "https://github.com/mia1024/grade#readme",
+  "homepage": "https://github.com/mia1024/grade-browser-extension#readme",
   "devDependencies": {
     "@types/chrome": "^0.0.145",
     "@types/jquery": "^3.5.5",

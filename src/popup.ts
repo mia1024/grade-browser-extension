@@ -12,6 +12,7 @@ const now = new Date();
 (async () => {
     let courses: Course[];
     try {
+        root.empty().html("Fetching course list")
         courses = (await getCourses()).filter(c => c.active);
     } catch (e) {
         if (e.message === "Not logged in") {
@@ -26,11 +27,13 @@ const now = new Date();
     console.log(courses)
     let i = 0;
     let assignments: Assignment[] = [];
+    root.empty().html(`Fetching assignments 0/${courses.length}`)
     let promise = new Promise((resolve) => {
         for (let course of courses)
             getAssignments(course).then(a => {
                 assignments.push(...a)
                 i += 1;
+                root.empty().html(`Fetching assignments ${i}/${courses.length}`)
                 if (i == courses.length) resolve(void "⊂(´・ω・｀⊂)") // embrace the void
             })
     })

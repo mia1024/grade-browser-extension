@@ -1,19 +1,8 @@
 import $ from "jquery";
-import {getCookies} from "./cookies";
 
 export async function makeRequest(endpoint:string){
-    let cookies = await getCookies();
-    let cookieHeader = ''
-    for (let c of cookies) {
-        cookieHeader += `${c.name}=${c.value};`
-    }
     let response = await $.ajax(
         "https://www.gradescope.com"+endpoint,
-        {
-            headers: {
-                cookies: cookieHeader
-            }
-        }
     );
     let parser = new DOMParser;
     return $(parser.parseFromString(response, "text/html"));

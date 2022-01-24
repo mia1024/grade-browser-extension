@@ -42,10 +42,10 @@ function parseCourses(dom: DOM):Course[] {
 
 
 export async function getCourses(): Promise<Course[]> {
-    let serializedCourses=localStorage.getItem('courses')
-    if (serializedCourses!==null){
-        return JSON.parse(serializedCourses)
-    }
+    // let serializedCourses=localStorage.getItem('courses')
+    // if (serializedCourses!==null){
+    //     return JSON.parse(serializedCourses)
+    // }
     let dom=await makeRequest("/");
     let courses=parseCourses(dom);
     localStorage.setItem('courses',JSON.stringify(courses));

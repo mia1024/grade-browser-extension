@@ -1,22 +1,20 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "Grade",
   "description": "Organizes your data from Gradescope into one place in a more sensible way",
-  "version": "0.1.2",
-  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
-  "background": {
-    "scripts": ["background.js"],
-    "persistent": false
+  "version": "0.2.0",
+  "content_security_policy": {
+    "script-src": "self",
+    "object-src": "self"
   },
-  "permissions": [
-    "cookies",
+  "host_permissions": [
     "https://www.gradescope.com/"
   ],
   "content_scripts":[{
     "matches":["https://www.gradescope.com/*"],
     "js": ["content.js"]
   }],
-  "browser_action": {
+  "action": {
     "default_title": "Show Gradescope summary",
     "default_popup": "index.html"
   },
